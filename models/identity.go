@@ -8,7 +8,7 @@ import (
 )
 
 type Identity struct {
-	UUID       uuid.UUID `gorm:"primarykey"`
+	UUID       uuid.UUID `gorm:"primarykey;type:uuid;default:gen_random_uuid()"`
 	UserAgent  string
 	IP         string
 	LastOnline time.Time
