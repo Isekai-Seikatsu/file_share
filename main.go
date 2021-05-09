@@ -3,7 +3,6 @@ package main
 import (
 	"file_share/models"
 	"fmt"
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -25,10 +24,9 @@ func main() {
 
 	router := gin.Default()
 	router.Use(IdentityHandler(db))
-	
-	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Home Page")
-	})
+
+	router.GET("/newbuck", AddBucketHandler(db))
+	router.GET("/buckets", ListBucketHandler(db))
 
 	router.Run()
 }

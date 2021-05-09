@@ -16,7 +16,7 @@ func IdentityHandler(db *gorm.DB) gin.HandlerFunc {
 			SetNewIdentity(c, db)
 			return
 		}
-	
+
 		var uid uuid.UUID
 		if err := (&uid).UnmarshalText([]byte(cookie)); err != nil {
 			c.AbortWithError(http.StatusBadRequest, err)

@@ -13,6 +13,7 @@ type Identity struct {
 	IP         string
 	LastOnline time.Time
 	CreatedAt  time.Time
+	Buckets    []Bucket
 }
 
 func (i *Identity) AfterFind(tx *gorm.DB) error {
