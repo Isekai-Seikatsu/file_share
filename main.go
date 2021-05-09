@@ -3,13 +3,13 @@ package main
 import (
 	"file_share/models"
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
 
 func main() {
 	dsn := fmt.Sprintf(
@@ -21,11 +21,13 @@ func main() {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&models.Identity{})
+	db.AutoMigrate(&models.Identity{}, &models.Bucket{})
 
 	router := gin.Default()
+	router.Use(IdentityHandler(db))
+	
 	router.GET("/", func(c *gin.Context) {
-		HomeHandler(c, db)
+		c.String(http.StatusOK, "Home Page")
 	})
 
 	router.Run()
