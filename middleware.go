@@ -10,7 +10,7 @@ import (
 )
 
 
-func HomeHandler (c *gin.Context, db *gorm.DB) {
+func HomeHandler(c *gin.Context, db *gorm.DB) {
 	cookie, err := c.Cookie("UUID")
 	if err != nil {
 		SetNewIdentity(c, db)
