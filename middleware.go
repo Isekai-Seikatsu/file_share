@@ -33,7 +33,7 @@ func IdentityHandler(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 		c.Set("identity", &i)
-		c.String(http.StatusOK, "Old identity value: %s \n", &i)
+		// c.String(http.StatusOK, "Old identity value: %s \n", &i)
 	}
 }
 
@@ -45,5 +45,5 @@ func SetNewIdentity(c *gin.Context, db *gorm.DB) {
 	}
 	c.SetCookie("UUID", i.UUID.String(), 3600, "/", "localhost", false, true)
 	c.Set("identity", &i)
-	c.String(http.StatusOK, "New Identity value: %s \n", &i)
+	// c.String(http.StatusOK, "New Identity value: %s \n", &i)
 }

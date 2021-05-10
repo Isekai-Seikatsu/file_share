@@ -7,9 +7,9 @@ import (
 )
 
 type Bucket struct {
-	ID           uint      `gorm:"primaryKey"`
+	ID           uuid.UUID `gorm:"primarykey;type:uuid;default:gen_random_uuid()"`
 	IdentityUUID uuid.UUID `gorm:"primaryKey;type:uuid"`
-	Expiry   time.Time
+	Expiry       time.Time
 	CreatedAt    time.Time
 }
 

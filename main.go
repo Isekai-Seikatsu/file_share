@@ -22,11 +22,18 @@ func main() {
 
 	db.AutoMigrate(&models.Identity{}, &models.Bucket{})
 
+	mc, err := GetMinioClient()
+	if err != nil {
+		panic(err)
+	}
+
 	router := gin.Default()
 	router.Use(IdentityHandler(db))
 
-	router.GET("/newbuck", AddBucketHandler(db))
-	router.GET("/buckets", ListBucketHandler(db))
+	router.GET("/bucket", BucketHandler(db, mc))
+	router.GET("/bucket/:buckid", ListBucketHandler(db, mc))
+
+	router.PUT("/bucket/:buckid/:filename", RedirectwUploadLink(db, mc))
 
 	router.Run()
 }
